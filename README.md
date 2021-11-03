@@ -1,5 +1,14 @@
-# etl_ece_dash
+# etl_ece_dashboard
 Extract deployment data from ECE and load it into Kibana for analysis and dashboarding
+
+## SETUP
+jq is required to convert newlines and whitespaces for the extracted json paylod to single line for the ES _bulk api.
+Download it here. https://stedolan.github.io/jq/
+
+Edit variables below and run script.
+
+Use the logging and monitoring cluster within ECE for access to even more interesting data.
+
 
 ```
 ##ECE##
