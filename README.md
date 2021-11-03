@@ -38,20 +38,20 @@ idx_meta="{\"index\" : { \"_index\" : \"$index_name\" } }"
 for i in "${cluster_ids[@]}"
 do
    :
-   #echo $idx_meta
-   #curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/apm/main-apm -H "Authorization: ApiKey ${api_key}" 2>/dev/null
-   #echo ""
-   #echo $idx_meta
-   #curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/appsearch/main-appsearch -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/apm/main-apm -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/appsearch/main-appsearch -H "Authorization: ApiKey ${api_key}" 2>/dev/null
    echo ""
    echo $idx_meta
    curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/elasticsearch/main-elasticsearch -H "Authorization: ApiKey ${api_key}" 2>/dev/null
-   #echo ""
-   #echo $idx_meta
-   #curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/enterprise_search/main-enterprice_search -H "Authorization: ApiKey ${api_key}" 2>/dev/null
-   #echo ""
-   #echo $idx_meta
-   #curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/kibana/main-kibana -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/enterprise_search/main-enterprice_search -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/kibana/main-kibana -H "Authorization: ApiKey ${api_key}" 2>/dev/null
 
 done >> bulk_load.json
 
