@@ -1,4 +1,4 @@
-# etl_ece_dashboard
+# ece_deployment_dashboard
 Extract deployment data from ECE and load it into Kibana for analysis and dashboarding
 
 ## SETUP
@@ -81,8 +81,10 @@ curl --user $user_pass -s -H "Content-Type: application/x-ndjson" -XPOST $target
 echo ""
 echo "...done"
 echo ""
+
 #wait for ES commit interval before trying to delete
 sleep 5
+
 echo ""
 echo "Clean up..."
 #cleanup
