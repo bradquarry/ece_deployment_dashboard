@@ -1,16 +1,3 @@
-# ece_deployment_dashboard
-Extract deployment data from ECE and load it into Kibana for analysis and dashboarding
-
-## SETUP
-jq is required to convert newlines and whitespaces for the extracted json paylod to single line for the ES _bulk api.
-Download it here. https://stedolan.github.io/jq/
-
-Edit variables below and run script.
-
-Use the logging and monitoring cluster within ECE for access to even more interesting data.
-
-
-```
 ##ECE##
 #Generate an ECE API Key and put it here, https://www.elastic.co/guide/en/cloud-enterprise/current/ece-restful-api-authentication.html
 api_key=MzBzVTVud0JoX1RYRnZpb1pveHQ6ZlF5X3NERjZSbzJlNW0xYjBNRWNidw
@@ -55,6 +42,22 @@ do
    echo ""
    echo $idx_meta
    curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/kibana/main-kibana -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/apm/apm -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/appsearch/appsearch -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/elasticsearch/elasticsearch -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/enterprise_search/enterprise_search -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+   echo ""
+   echo $idx_meta
+   curl -XGET http://${ece_management_ip_port}/api/v1/deployments/$i/kibana/kibana -H "Authorization: ApiKey ${api_key}" 2>/dev/null
+
 
 done >> bulk_load.json
 
@@ -82,17 +85,80 @@ echo ""
 echo "...done"
 echo ""
 
-#wait for ES commit interval before trying to delete
+echo ""
+echo "Waiting 5 seconds for Elasticsearch commit interval before trying to delete or update..."
 sleep 5
+echo ""
+echo "...done"
+echo ""
+
+
+echo ""
+echo "Remove resources that were not found..."
+#Remove resources not foud
+curl --user $user_pass -H "Content-Type: application/x-ndjson" -XPOST "$target_cluster/$index_name/_delete_by_query" -d' 
+{ "query": 
+        { "match": { "errors.code.keyword": "deployments.deployment_resource_not_found"} 
+        } 
+}'
+echo ""
+echo "...done"
+echo ""
+
+echo ""
+echo "Waiting 5 seconds for Elasticsearch commit interval before trying to delete or update..."
+sleep 5
+echo ""
+echo "...done"
+echo ""
+
+
+echo ""
+echo "Add common cluster name field to different document types pass 1..."
+curl --user $user_pass -H "Content-Type: application/x-ndjson" -XPOST "$target_cluster/$index_name/_update_by_query" -d' 
+{
+ "query": {
+   "match_all": {}
+ }
+,
+ "script": {
+  "lang": "painless",
+   "source": "if (ctx._source.info.cluster_name != null ) { ctx._source.cluster_name_combined = ctx._source.info.cluster_name;}"
+  }
+}'
+
+echo ""
+echo "Waiting 5 seconds for Elasticsearch commit interval before trying to delete or update..."
+sleep 5
+echo ""
+echo "...done"
+echo ""
+
+echo ""
+echo "Add common cluster name field to different document types pass 2"
+curl --user $user_pass -H "Content-Type: application/x-ndjson" -XPOST "$target_cluster/$index_name/_update_by_query" -d' 
+{
+ "query": {
+   "match_all": {}
+ }
+,
+ "script": {
+  "lang": "painless",
+   "source": "if (ctx._source.info.name != null ) { ctx._source.cluster_name_combined = ctx._source.info.name;}"
+  }
+}'
+
+echo ""
+echo "...done"
+echo ""
+
 
 echo ""
 echo "Clean up..."
 #cleanup
 rm bulk_load.json2 2> /dev/null
 rm bulk_load.json 2> /dev/null
-#delete records with no resource found
-curl --user $user_pass -s -H "Content-Type: application/x-ndjson" -XPOST $target_cluster/$index_name/_delete_by_query -d' { "query": { "match": { "errors.code.keyword": "deployments.deployment_resource_not_found" } } } '
+
 echo ""
 echo "...done"
 echo ""
-```
