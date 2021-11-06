@@ -9,9 +9,12 @@ NOTE: This script is new as of Nov 4th 2021 and has only been tested in lab cond
 - A target Elasticsearch cluster to load data
 - Linux
 
-# Setup
-- Install jq
+# Instructions
+- Install jq-linix64 in the same directory at the script
 - Copy the script locally and modify appropriate variables at the start of the script
+- If you encounter errors or hangs while runnint the script re-check your variables
+- Create Kibana index patters for the index you created
+- When visualizating data use the common field cluster_name_combined
 
 # Example dashboard you can create
 You can do so much more than this, but a simple dashboard shows top clusters by ram used with a breakdown of ECE node types used along with version breakdown.
