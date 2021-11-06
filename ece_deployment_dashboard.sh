@@ -77,6 +77,7 @@ do
 
 done >> bulk_load.json
 
+#convert all JSON output to single lines for load into Elasticsearch
 ./jq-linux64 -c . bulk_load.json >> bulk_load.json2
 
 echo ""
