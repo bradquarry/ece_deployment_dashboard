@@ -6,12 +6,12 @@ NOTE: This script is new as of Nov 4th 2021 and has only been tested in lab cond
 # Requirements
 - An ECE environment
 - jq (Download here: https://stedolan.github.io/jq/download/)
-- A target Elasticsearch cluster to load data to
+- A target Elasticsearch cluster to load data
 - Linux
 
 # Setup
 - Install jq
-- Copy the script locally and modify appropriate source and target variables
+- Copy the script locally and modify appropriate variables at the start of the script
 
 # Example dashboard you can create
 You can do so much more than this, but a simple dashboard shows top clusters by ram used with a breakdown of ECE node types used along with version breakdown.
