@@ -15,6 +15,8 @@ user_pass=elastic:STlruuveDtVvQhHFewwAJmw2
 ##Index name where you want to store results
 index_name=cluster_details
 
+./jq-linux64 || { echo 'Please install jq before running this script' ; exit 1; }
+
 ##START
 #load all unique cluster ID's into an array
 cluster_ids=(`curl -XGET http://${ece_management_ip_port}/api/v1/deployments -H "Authorization: ApiKey ${api_key}" 2>/dev/null | grep -B1 -e '"name" : "' | grep '"id"' | cut -c 15- | cut -c -32`)
