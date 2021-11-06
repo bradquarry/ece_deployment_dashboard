@@ -1,3 +1,6 @@
+
+##########EDIT THESE VARIABLES############
+
 ##ECE##
 #Generate an ECE API Key and put it here, https://www.elastic.co/guide/en/cloud-enterprise/current/ece-restful-api-authentication.html
 api_key=M2N6UjlYd0J3WXl2WkJ4bmo0SHU6bThSTXIwazVSSG05QnJCVkY4XzJmUQ==
@@ -14,6 +17,8 @@ user_pass=elastic:6gkkDMG3YJuGB2IRxfXLTWoz
 
 ##Index name where you want to store results
 index_name=cluster_details
+
+##########STOP EDITING HERE############
 
 #just in case script exited early...
 echo ""
