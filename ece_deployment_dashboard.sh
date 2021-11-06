@@ -15,6 +15,20 @@ user_pass=elastic:STlruuveDtVvQhHFewwAJmw2
 ##Index name where you want to store results
 index_name=cluster_details
 
+#exit if anything errors
+set -e
+
+echo ""
+echo "Clean up..."
+#cleanup
+rm bulk_load.json2 2> /dev/null
+rm bulk_load.json 2> /dev/null
+
+echo ""
+echo "...done"
+echo ""
+
+#test if jq exists
 ./jq-linux64 || { echo 'Please install jq before running this script' ; exit 1; }
 
 ##START
