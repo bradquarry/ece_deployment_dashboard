@@ -1,13 +1,12 @@
 # Create ECE Deployment Dashboard
-This script will read all of the deployed resources out of the Elastic Cloud Enterprise deployments API, format and bulk load the results into Elasticsearch, and then create a new field in each document called cluster_name_combined for aggregations across the different document types for each resource.
+This script will read all of the deployed resources out of the Elastic Cloud Enterprise deployments API, format and bulk load the results into and Elasticsearch cluster of chouse, and then create a new field in each document called cluster_name_combined for aggregations across the different document types for each resource.
 
 NOTE: This script is new as of Nov 4th 2021 and has only been tested in lab conditions for versions 1.0 to 2.12 of ECE
 
 # Requirements
 - An ECE environment
-- jq (Download here: https://stedolan.github.io/jq/download/)
+- jq-linux64 (Download here: https://stedolan.github.io/jq/download/)
 - A target Elasticsearch cluster to load data
-- Linux
 
 # Instructions
 1. Install jq-linix64 in the same directory at the script
