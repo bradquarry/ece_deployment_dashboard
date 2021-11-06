@@ -29,7 +29,8 @@ echo "...done"
 echo ""
 
 #test if jq exists
-./jq-linux64 || { echo 'Please install jq before running this script' ; exit 1; }
+./jq-linux64 || { echo 'Please install jq before running this script, wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64' ; exit 1; }
+
 
 ##START
 #load all unique cluster ID's into an array
