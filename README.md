@@ -1,7 +1,7 @@
 # What is this and how does it help me?
 This script will read all of the deployed resources out of the Elastic Cloud Enterprise deployments API, format and bulk load the results into Elasticsearch, and then create a new field in each document called cluster_name_combined for aggregations across the different document types for each resource.
 
-NOTE: This script is new as of Nov 4th 2021 and has only been tested in in limited circumstances. It is your responsibility to validate the data matches between ECE and Elasticsearch for the specific outcomes you are looking for.
+NOTE: This script is new as of Nov 4th 2021 and has only been tested in lab conditions for versions 1.0 to 2.12 of ECE
 
 # Requirements
 - An ECE environment
