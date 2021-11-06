@@ -1,23 +1,21 @@
 ##ECE##
 #Generate an ECE API Key and put it here, https://www.elastic.co/guide/en/cloud-enterprise/current/ece-restful-api-authentication.html
-api_key=MzBzVTVud0JoX1RYRnZpb1pveHQ6ZlF5X3NERjZSbzJlNW0xYjBNRWNidw
+api_key=M2N6UjlYd0J3WXl2WkJ4bmo0SHU6bThSTXIwazVSSG05QnJCVkY4XzJmUQ==
 
 #IP:PORT for an ECE management node
-ece_management_ip_port=172.31.87.74:12400
+ece_management_ip_port=172.31.94.62:12400
 
 ##TARGET CLUSTER TO STORE RESULTS##
-#ADDRESS/IP:PORT
-target_cluster=http://03658eed83a144219eca839e72061874.34.227.22.102.ip.es.io:9200
+#ADDRESS/IP:PORT, example https://ece-deployment-dashboard.es.us-central1.gcp.cloud.es.io:9243
+target_cluster=https://ece-deployment-dashboard.es.us-central1.gcp.cloud.es.io:9243
 
 #User and password for target cluster
-user_pass=elastic:STlruuveDtVvQhHFewwAJmw2
+user_pass=elastic:6gkkDMG3YJuGB2IRxfXLTWoz
 
 ##Index name where you want to store results
 index_name=cluster_details
 
-#exit if anything errors
-set -e
-
+#just in case script exited early...
 echo ""
 echo "Clean up..."
 #cleanup
@@ -27,10 +25,6 @@ rm bulk_load.json 2> /dev/null
 echo ""
 echo "...done"
 echo ""
-
-#test if jq exists
-./jq-linux64 || { echo 'Please install jq before running this script, wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64' ; exit 1; }
-
 
 ##START
 #load all unique cluster ID's into an array
