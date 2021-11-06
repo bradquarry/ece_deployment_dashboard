@@ -1,5 +1,5 @@
 # What is this and how does it help me?
-This script will read from the ECE Deployments API and capture all the deployment details for every unique cluster, convert the output to bulk load into Elasticsearch, and load it into a server of your choosing. This allows for extremely robust reporting on all the clusters a customer has in ECE and is especially helpful when you have hundreds of clusters.
+This script will read all of the deployed resources out of the Elastic Cloud Enterprise deployments API, format and bulk load the results into Elasticsearch, and then create a new column called cluster_name_combined for aggregations across the different document types for each resource.
 
 NOTE: This script is new as of Nove 4th 2021 and has only been tested in limited circumstances. It is your responsibility to validate the data matches between ECE and Elasticsearch for the specific outcomes you are looking for. 
 
