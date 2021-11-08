@@ -1,7 +1,7 @@
 # Create ECE Deployment Dashboard
-This script will read all of the deployed resources out of the Elastic Cloud Enterprise deployments API, format and bulk load the results into and Elasticsearch cluster of chouse, and then create a new field in each document called cluster_name_combined for aggregations across the different document types for each resource.
+This script will read all of the deployed resources out of the Elastic Cloud Enterprise deployments API, format and bulk load the results into an Elasticsearch cluster of choice, and create a new field in each document called cluster_name_combined for aggregations across the different document types for each resource.
 
-NOTE: This script is new as of Nov 4th 2021 and has only been tested in lab conditions for versions 1.0 to 2.12 of ECE
+NOTE: This has been tested in lab conditions within a fresh install of ECE 2.12 and an ECE 2.9 install that was upgraded over time from 1.0.
 
 # Requirements
 - An ECE environment
